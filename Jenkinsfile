@@ -1,25 +1,10 @@
-
 pipeline {
-  agent any
-  tools {nodejs "12.16.1"}
-  stages {
-    stage('preflight') {
-      steps {
-        echo sh(returnStdout: true, script: 'env')
-        sh 'node -v'
-      }
+    agent { docker { image 'node:12.16.1' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'npm --version'
+            }
+        }
     }
-    stage('build') {
-      steps {
-        sh 'npm --version'
-        sh 'git log --reverse -1'
-        sh 'npm install'
-      }
-    }
-    stage('test') {
-      steps {
-        sh 'npm test'
-      }
-    }
-  }
 }
