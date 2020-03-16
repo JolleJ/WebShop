@@ -1,10 +1,13 @@
 pipeline {
-    agent { docker { image 'node:12.16.1' } }
-    stages {
-        stage('build') {
-            steps {
-                sh 'npm --version'
-            }
-        }
+  agent any
+ 
+  tools {nodejs "Node1"}
+ 
+  stages {
+    stage('Example') {
+      steps {
+        sh 'npm config ls'
+      }
     }
+  }
 }
